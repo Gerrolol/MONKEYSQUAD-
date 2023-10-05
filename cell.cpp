@@ -1,7 +1,1 @@
-/*
-
-position(x,y)
-cell type;
-
-
-*/
+#include "cell.h"
