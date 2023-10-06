@@ -1,2 +1,2 @@
 all:
-	g++ -I src/include -L src/lib -o main main.cpp -lSDL2main -lSDL2
+	g++ -I src/include -L src/lib -o main main.cpp Game.cpp -lSDL2main -lSDL2

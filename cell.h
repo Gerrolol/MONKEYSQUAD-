@@ -4,10 +4,11 @@
 
 class Cell {
     private:
-    int x,y;
+    float xpos,ypos;
 
     public:
-    Cell(int x, int y);
+    Cell();
+    ~Cell();
 
 };
 
