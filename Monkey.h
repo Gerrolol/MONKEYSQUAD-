@@ -1,6 +1,6 @@
-#define MONKEY.H
+#ifndef MONKEY_H
 #include <string>
-#ifndef MONKEY.H
+#define MONKEY_H
 
 class Monkey {
     private:
@@ -11,7 +11,7 @@ class Monkey {
 
     
     public:
-     Monkey(std::string name, int initialCost, int initialRange, int initialDamage);
-
+    Monkey(std::string name, int initialCost, int initialRange, int initialDamage);
+    void upgrade(int newRange, int newDamage);
 };
 #endif
