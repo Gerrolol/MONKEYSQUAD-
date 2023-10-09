@@ -6,7 +6,7 @@
 #include <string>
 #include <iostream>
 #include "TextureLoader.h"
-#include "path.h"
+#include "pathTile.h"
 #include "Land.h"
 #include "water.h"
 

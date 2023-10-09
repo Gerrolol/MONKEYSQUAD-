@@ -43,7 +43,7 @@ void Map::setCell(int pos, char celltype){
             break;
         case 'P':
             delete listCells[pos];
-            newCell = new Path;
+            newCell = new pathTile;
             break;
         case 'W':
             delete listCells[pos];
