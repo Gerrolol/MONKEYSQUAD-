@@ -4,6 +4,7 @@
 #include "SDL2/SDL.h"
 #include <iostream>
 #include <chrono>
+#include "Balloon.h"  
 #include "Map.h"
 
 class Game{
