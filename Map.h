@@ -5,19 +5,30 @@
 #include "SDL2/SDL.h"
 #include <string>
 #include <iostream>
+#include "TextureLoader.h"
+#include "path.h"
+#include "Land.h"
+#include "water.h"
 
 class Map{
     public:
+    Map();
     Map(SDL_Renderer* renderer, int nCellRows, int nCellCols);
-    void draw(); //draws whole map
-    virtual std::string returnCellType(std::vector<Cell> v(int x)); //returns what type of cell it is
-    void setTile(int x, int y, Cell*); //sets tile to type( inherited type)
+    void draw(SDL_Renderer *renderer, int tilesize); //draws whole map
+    void setCell(int pos, char celltype); //sets cell to type( inherited type)
     
     private:
-    void drawCell(SDL_Renderer* renderer, int xpos, int ypos, int tilesize); //draw individual cell
-    std::vector<Cell*> listCells; // vector of pointers to cells
-    const int nRows,nCols;
+    void drawCell(SDL_Renderer* renderer, int pos, int tilesize); //draw individual cell
+    std::vector<Cell*> listCells; // vector of cells
+    int nRows,nCols;
+    Cell* newCell;
 
+    SDL_Texture *textureWater = nullptr,
+    *texturePath = nullptr,
+    *textureLand = nullptr,
+    *textureSpikedLand = nullptr,
+    *textureDartMonkey = nullptr,
+    *textureBomb = nullptr,
+    *textureSniper = nullptr;
 };
-
 #endif

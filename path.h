@@ -1,4 +1,10 @@
-#ifndef PATH_H
-#define PATH_H
+#pragma once
+#include "cell.h"
 
-#endif
+class Path : public Cell{
+    private:
+        
+    public:
+        Path();
+        ~Path();
+};
