@@ -1,43 +1,35 @@
 #ifndef BALLOON_H
 #define BALLOON_H
 
-class Balloon{
-protected:
-float x;  
-float y;  
-float velocity_x;  // Velocity in the X direction
-float velocity_y;  // Velocity in the Y direction
+#include <string>
 
-int health;
-float speed;
-int reward;
-
+class Balloon {
 public:
-    Balloon(float initialX, float initialY, int initialHealth, int initialReward);
-    float GetX() const;
-    float GetY() const;
-    int GetHealth() const;
+    Balloon(const std::string& color, int value, int health);
+    virtual ~Balloon();
 
-    float GetVelocityX() const;
-    float GetVelocityY() const;
-  
-    // Setters for float x, y, velocity_x, velocity_y
-    void SetX(float newX);
-    void SetY(float newY);
-    void SetHealth(int newHealth);
+    std::string getColor() const;
+    
+    bool isPopped() const;
 
-    virtual void SetVelocityX(float newVelocityX);
-    virtual void SetVelocityY(float newVelocityY);
-    //float update_position_x(float added_x);
-    //float update_position_y(float added_y);
+    void takeDamage(int damage);
 
-    virtual void TakeDamage(int damage);
-    bool IsPopped();
+    virtual void pop();
+
+    // Methods for balloon movement
+    void move(int velocityX, int velocityY);
+    int getX() const;
+    int getY() const;
+    int getValue();
+
+
+private:
+    mutable bool popped;
+    std::string color;
+    int x, y;  
+    int reward;
+    int hp;
+
 };
-#endif
-
-  //include in main:
-  //for (Balloon& balloon : balloons) {
-  //balloon.update_position_x(balloon.GetX() + balloon.GetVelocityX());
-  //balloon.update_position_y(balloon.GetY() + balloon.GetVelocityY());
+#endif 
 

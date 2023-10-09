@@ -1,61 +1,48 @@
 #include "Balloon.h"
+#include <iostream>
 
-// Constructor to initialize the balloon's attributes
-Balloon::Balloon(float initialX, float initialY, int initialHealth, int initialReward)
-    : x(initialX),
-      y(initialY),
-      health(initialHealth),
-      reward(initialReward){
-      }
+Balloon::Balloon(const std::string& color, int value, int health) : color(color), x(0), y(0), popped(false), reward(value), hp(health) {} // Default starting position at (0, 0)
 
-// Getters
-float Balloon::GetX() const {
+Balloon::~Balloon() {
+        if (isPopped()==true){
+        delete this;
+    }
+}
+
+std::string Balloon::getColor() const {
+    return color;
+}
+
+void Balloon::takeDamage(int damage){
+    hp = hp - damage;
+}
+
+bool Balloon::isPopped() const {
+    if (hp <= 0){
+        popped = true;
+    }
+    return popped;
+}
+
+void Balloon::pop() {
+    if (isPopped()==true){
+        delete this;
+    }
+}
+
+void Balloon::move(int velocityX, int velocityY) {
+    x += velocityX;
+    y += velocityY;
+}
+
+int Balloon::getX() const {
     return x;
 }
 
-float Balloon::GetY() const {
+int Balloon::getY() const {
     return y;
 }
 
-float Balloon::GetVelocityX() const {
-    return velocity_x;
-}
-
-float Balloon::GetVelocityY() const {
-    return velocity_y;
-}
-
-int Balloon::GetHealth() const {
-    return health;
-}
-
-// Setters
-void Balloon::SetX(float newX) {
-    x = newX;
-}
-
-void Balloon::SetY(float newY) {
-    y = newY;
-}
-
-void Balloon::SetVelocityX(float newVelocityX) {
-    velocity_x = newVelocityX;
-}
-
-void Balloon::SetVelocityY(float newVelocityY) {
-    velocity_y = newVelocityY;
-}
-
-void Balloon::SetHealth(int newHealth) {
-    health = newHealth;
-}
-
-// Function to apply damage to the balloon
-void Balloon::TakeDamage(int damage) {
-    health -= damage;
-}
-
-// Function to check if the balloon is popped (health <= 0)
-bool Balloon::IsPopped() {
-    return health <= 0;
+int Balloon::getValue(){
+    return reward;
 }

@@ -1,14 +1,7 @@
 #include "RedBalloon.h"
 
-RedBalloon::RedBalloon(float initialX, float initialY, int initialHealth, int initialreward)
-    : Balloon(initialX, initialY, initialHealth, initialreward) {
-        this->RedValue = initialreward;
+RedBalloon::RedBalloon() : Balloon("red", 10, 100) {
 }
 
-void RedBalloon::SetVelocityX(float newVelocityX){ 
-    this->Red_VelocityX = newVelocityX;
-}
+RedBalloon::~RedBalloon() {} 
 
-void RedBalloon::SetVelocityY(float newVelocityY){
-    this->Red_VelocityY = newVelocityY;
-}

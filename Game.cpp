@@ -1,4 +1,14 @@
 #include "Game.h"
+#include "Game.h"
+#include "Balloon.h" 
+#include "RedBalloon.h"
+#include "BlueBalloon.h" 
+#include "GreenBalloon.h"
+#include <vector>
+#include "path.h"
+
+std::vector<Balloon*> balloons; 
+
 
 Game::Game(){}
 
@@ -40,6 +50,47 @@ void Game::handleEvents(){
 }
 
 void Game::update(){
+for (size_t i = 0; i < balloons.size(); ++i) {
+        Balloon* balloon = balloons[i];
+
+
+        //code the movement of the balloon here
+        //
+        
+    
+        if (balloon->isPopped()) {
+            if (balloon->getColor() == "blue") {
+
+                 int poppedX = balloon->getX();
+                 int poppedY = balloon->getY();
+
+                balloons.erase(balloons.begin() + i);
+                delete balloon;
+
+                RedBalloon* newBalloon = new RedBalloon();
+                newBalloon->move(poppedX, poppedY);
+                balloons.push_back(newBalloon);
+            }
+            else if (balloon->getColor() == "green") {
+
+                int poppedX = balloon->getX();
+                int poppedY = balloon->getY();
+
+                balloons.erase(balloons.begin() + i);
+                delete balloon;
+
+                BlueBalloon* newBalloon = new BlueBalloon();
+                newBalloon->move(poppedX, poppedY);
+
+                balloons.push_back(newBalloon);
+            }
+
+            else if (balloon->getColor() == "red") {
+                balloons.erase(balloons.begin() + i);
+                delete balloon;
+            }
+        }
+}
 }
 
 void Game::render(){
