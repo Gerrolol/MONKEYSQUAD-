@@ -69,7 +69,7 @@ void Balloon::render(SDL_Renderer* renderer) {
     SDL_SetRenderDrawColor(renderer, bgColor.r, bgColor.g, bgColor.b, bgColor.a);
 
     // Clear the screen with the background color
-    SDL_RenderClear(renderer);
+    //SDL_RenderClear(renderer);
 
     // Set the rendering color to the balloon's color
     SDL_SetRenderDrawColor(renderer, colorSDL.r, colorSDL.g, colorSDL.b, colorSDL.a);

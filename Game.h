@@ -9,10 +9,6 @@
 
 class Game{
     public:
-<<<<<<< HEAD
-    
-=======
->>>>>>> 544c217c7c9fa22cd32b495241199bc685d72842
     ~Game();
     Game(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
     void handleEvents();

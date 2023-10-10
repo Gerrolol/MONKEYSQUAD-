@@ -128,13 +128,12 @@ for (size_t i = 0; i < balloons.size(); ++i) {
 void Game::render(){
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
-
-    balloons[0]->render(renderer);
     //add stuff to render
         //for (size_t i = 0; i < balloons.size(); ++i) {
         //balloons[i]->render(renderer);
         //}
     Level.draw(renderer, cellSize);
+    balloons[0]->render(renderer);
     SDL_RenderPresent(renderer);
 }
 
