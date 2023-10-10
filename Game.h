@@ -9,7 +9,7 @@
 
 class Game{
     public:
-    Game::Game();
+    
     ~Game();
     Game(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
     void handleEvents();
