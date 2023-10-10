@@ -10,7 +10,7 @@ std::map<std::string, SDL_Color> Balloon::colorMap = {
 };
 
 Balloon::Balloon(const std::string& color, int value, int health) 
-: color(color), x(50), y(50), popped(false), reward(value), hp(health), radius(10){
+: color(color), x(170), y(10), popped(false), reward(value), hp(health), radius(10){
  auto colorIt = colorMap.find(color);
     if (colorIt != colorMap.end()) {
         colorSDL = colorIt->second;

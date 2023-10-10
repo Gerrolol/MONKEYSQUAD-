@@ -79,10 +79,25 @@ void Game::update(){
 for (size_t i = 0; i < balloons.size(); ++i) {
         Balloon* balloon = balloons[i];
         // Update the position of the balloon
-        balloon->move(1,0);
+        if (balloon->getY() < 220 || (balloon->getX() <= 650 && balloon->getY() >= 700)) {
+            balloon->move(0, 1); // Move down
+        }
+        else if (balloon->getX() < 600 && balloon->getY() >= 220 && balloon->getY() < 400) {
+            balloon->move(1, 0); // Move right
+        }
+        else if (balloon->getY() < 400) {
+            balloon->move(0, 1); // Move down
+        }
+        else if (balloon->getY() >= 370 && balloon->getX() > 160) {
+            balloon->move(-1, 0); // Move left
+        }
+        else {
+            balloon->move(0, 1); // Move down
+        }
+    }
+}
 
-}
-}
+
 
 /*for (size_t i = 0; i < balloons.size(); ++i) {
         Balloon* balloon = balloons[i];
