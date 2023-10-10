@@ -4,9 +4,10 @@
 
 class Cell {
     private:
-    float xpos,ypos;
 
     public:
+    char type;
+    char getType();
     Cell();
     ~Cell();
 

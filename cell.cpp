@@ -1,5 +1,11 @@
 #include "cell.h"
 
-Cell::Cell(){}
+Cell::Cell(){
+    type = 'E';
+}
 
 Cell::~Cell(){}
+
+char Cell::getType(){
+    return type;
+}

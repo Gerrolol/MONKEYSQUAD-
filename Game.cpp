@@ -11,7 +11,7 @@ Game::Game(){}
 
 Game::~Game(){}
 
-void Game::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen){
+Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fullscreen){
     int flags = 0;
     if (fullscreen){
         flags = SDL_WINDOW_FULLSCREEN;
@@ -42,6 +42,18 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
         balloons.push_back(new BlueBalloon());
         balloons.push_back(new GreenBalloon());
     */
+    Level = Map(renderer, width / cellSize, height/ cellSize);
+    for (int i=0; i<192;i++){
+        Level.setCell(i,'L');
+    }
+    int PathPos[30] = {3,19,35,51,67,68,69,70,71,72,73,74,75,76,92,108,124,140,139,138,137,136,135,134,133,132,131,147,163,179};
+    for (int i=0; i<30; i++){
+        Level.setCell(PathPos[i],'P');
+    }
+    int WaterPos[18] = {13,22,23,24,29,30,39,40,46,47,97,98,99,169,170,171,186,187};
+    for (int i=0; i<18; i++){
+        Level.setCell(WaterPos[i],'W');
+    }
 }
 
 
@@ -52,6 +64,13 @@ void Game::handleEvents(){
         case SDL_QUIT:
             isRunning = false;
             break;
+        
+        case SDL_MOUSEBUTTONDOWN:
+            if (event.button.button == SDL_BUTTON_LEFT){
+                mouseDownStatus = SDL_BUTTON_LEFT;
+            }
+        case SDL_MOUSEBUTTONUP:
+            mouseDownStatus = 0;
 
         default:
             break;
@@ -109,6 +128,7 @@ for (size_t i = 0; i < balloons.size(); ++i) {
 */
 
 void Game::render(){
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
 
     balloons[0]->render(renderer);
@@ -116,6 +136,7 @@ void Game::render(){
         //for (size_t i = 0; i < balloons.size(); ++i) {
         //balloons[i]->render(renderer);
         //}
+    Level.draw(renderer, cellSize);
     SDL_RenderPresent(renderer);
 }
 

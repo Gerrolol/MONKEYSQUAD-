@@ -5,13 +5,13 @@
 #include <iostream>
 #include <chrono>
 #include "Balloon.h"  
-
+#include "Map.h"
 
 class Game{
     public:
-    Game();
+    Game::Game();
     ~Game();
-    void init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
+    Game(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
     void handleEvents();
     void update();
     void render();
@@ -23,6 +23,9 @@ class Game{
     bool isRunning;
     SDL_Window *window;
     SDL_Renderer *renderer;
+    const int cellSize = 48;
+    Map Level;
+    int mouseDownStatus = 0;
 
 };
 
