@@ -29,9 +29,9 @@ Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fu
     }else{
         isRunning = false;
     }
-    RedBalloon* redBalloon = new RedBalloon();
-    balloons.push_back(redBalloon);
-    /*
+    //RedBalloon* redBalloon = new RedBalloon();
+    //balloons.push_back(redBalloon);
+    
         RedBalloon* redBalloon = new RedBalloon();
         BlueBalloon* blueBalloon = new BlueBalloon();
         GreenBalloon* greenBalloon = new GreenBalloon();
@@ -39,7 +39,7 @@ Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fu
         balloons.push_back(new RedBalloon());
         balloons.push_back(new BlueBalloon());
         balloons.push_back(new GreenBalloon());
-    */
+    
     Level = Map(renderer, width / cellSize, height/ cellSize);
     for (int i=0; i<192;i++){
         Level.setCell(i,'L');
@@ -148,7 +148,10 @@ void Game::render(){
         //balloons[i]->render(renderer);
         //}
     Level.draw(renderer, cellSize);
-    balloons[0]->render(renderer);
+    //balloons[0]->render(renderer);
+        for (size_t i = 0; i < balloons.size(); ++i) {
+        balloons[i]->render(renderer);
+        }
     SDL_RenderPresent(renderer);
 }
 
