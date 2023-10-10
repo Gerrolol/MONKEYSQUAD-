@@ -1,14 +1,11 @@
 #include "Game.h"
-#include "Game.h"
 #include "Balloon.h" 
 #include "RedBalloon.h"
 #include "BlueBalloon.h" 
 #include "GreenBalloon.h"
 #include <vector>
-#include "path.h"
 
 std::vector<Balloon*> balloons; 
-
 
 Game::Game(){}
 
@@ -34,7 +31,19 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     }else{
         isRunning = false;
     }
+    RedBalloon* redBalloon = new RedBalloon();
+    balloons.push_back(redBalloon);
+    /*
+        RedBalloon* redBalloon = new RedBalloon();
+        BlueBalloon* blueBalloon = new BlueBalloon();
+        GreenBalloon* greenBalloon = new GreenBalloon();
+
+        balloons.push_back(new RedBalloon());
+        balloons.push_back(new BlueBalloon());
+        balloons.push_back(new GreenBalloon());
+    */
 }
+
 
 void Game::handleEvents(){
     SDL_Event event;
@@ -52,12 +61,17 @@ void Game::handleEvents(){
 void Game::update(){
 for (size_t i = 0; i < balloons.size(); ++i) {
         Balloon* balloon = balloons[i];
+        // Update the position of the balloon
+        balloon->move(1,0);
 
+}
+}
+
+/*for (size_t i = 0; i < balloons.size(); ++i) {
+        Balloon* balloon = balloons[i];
 
         //code the movement of the balloon here
         //
-        
-    
         if (balloon->isPopped()) {
             if (balloon->getColor() == "blue") {
 
@@ -90,16 +104,29 @@ for (size_t i = 0; i < balloons.size(); ++i) {
                 delete balloon;
             }
         }
+    }
 }
-}
+*/
 
 void Game::render(){
     SDL_RenderClear(renderer);
+
+    balloons[0]->render(renderer);
     //add stuff to render
+        //for (size_t i = 0; i < balloons.size(); ++i) {
+        //balloons[i]->render(renderer);
+        //}
     SDL_RenderPresent(renderer);
 }
 
 void Game::clean(){
+    // Clean up balloons and their memory
+    for (size_t i = 0; i < balloons.size(); ++i) {
+        delete balloons[i];
+    }
+    balloons.clear();
+
+    //clean up SDL resources
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
     SDL_Quit();

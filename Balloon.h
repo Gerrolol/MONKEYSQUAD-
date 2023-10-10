@@ -2,9 +2,11 @@
 #define BALLOON_H
 
 #include <string>
+#include <SDL2/SDL.h>
+#include <map>
 
 class Balloon {
-public:
+    public:
     Balloon(const std::string& color, int value, int health);
     virtual ~Balloon();
 
@@ -14,7 +16,7 @@ public:
 
     void takeDamage(int damage);
 
-    virtual void pop();
+    //virtual void pop();
 
     // Methods for balloon movement
     void move(int velocityX, int velocityY);
@@ -22,14 +24,21 @@ public:
     int getY() const;
     int getValue();
 
+    //for rendering 
+    void setColor(SDL_Color color);
 
-private:
+    static std::map<std::string, SDL_Color> colorMap;
+
+    void render(SDL_Renderer* renderer);
+
+    protected:
     mutable bool popped;
     std::string color;
     int x, y;  
     int reward;
     int hp;
-
+    SDL_Color colorSDL;
+    int radius;
 };
 #endif 
 

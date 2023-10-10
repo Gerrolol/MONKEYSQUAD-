@@ -4,6 +4,8 @@
 #include "SDL2/SDL.h"
 #include <iostream>
 #include <chrono>
+#include "Balloon.h"  
+
 
 class Game{
     public:

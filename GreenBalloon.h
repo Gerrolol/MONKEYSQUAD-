@@ -1,6 +1,6 @@
 #ifndef GREENBALLOON_H
 #define GREENBALLOON_H
-#include "Balloon.cpp"
+#include "Balloon.h"
 
 class GreenBalloon : public Balloon{
 
