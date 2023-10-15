@@ -13,6 +13,7 @@ class Cell {
     char getType();
     Cell();
     ~Cell();
+    int cooldown;
     int range;
     int x,y;
     int checkInRange(std::vector<Balloon*> balloons);

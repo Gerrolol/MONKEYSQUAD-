@@ -111,13 +111,17 @@ int balloonToPop = -1;
 for (int i = 0; i< Level.listCells.size();i++){
     if (Level.listCells[i]->getType() == 'D' ||Level.listCells[i]->getType() == 'S' ||Level.listCells[i]->getType() == 'C'){
         balloonToPop = Level.listCells[i]->checkInRange(balloons);
-        if (balloonToPop >-1){
+        if (Level.listCells[i]->cooldown > 0){
+            Level.listCells[i]->cooldown -=1;
+        }else if (balloonToPop >-1){
             switch (Level.listCells[i]->getType()){
                 case 'D':
                     balloons[balloonToPop]->takeDamage(100);
+                    Level.listCells[i]->cooldown = 60;
                     break;
                 case 'S':
                     balloons[balloonToPop]->takeDamage(300);
+                    Level.listCells[i]->cooldown = 180;
                     break;
                 case 'C':
                     int distance = 0;
@@ -126,6 +130,7 @@ for (int i = 0; i< Level.listCells.size();i++){
                     if (distance < 24){
                         balloons[i]->takeDamage(100);
                     }
+                    Level.listCells[i]->cooldown = 2;
             }
             }
         }
