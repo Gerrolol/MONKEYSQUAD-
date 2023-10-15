@@ -12,11 +12,14 @@ char Cell::getType(){
 }
 
 int Cell::checkInRange(std::vector<Balloon*> balloons){
-    int closestDistance = sqrt(pow(balloons[0]->getX() - this->x,2)+pow(balloons[0]->getY() - this->y, 2));
+    if(balloons.empty()){
+        return -1;
+    }
+    int closestDistance = sqrt(pow(balloons[0]->x - this->x,2)+pow(balloons[0]->y - this->y, 2));
     int index = 0;
     float distance = 0;
     for (int i = 1; i< balloons.size();i++){
-        distance = sqrt(pow(balloons[i]->getX() - this->x,2)+pow(balloons[i]->getY() - this->y, 2));
+        distance = sqrt(pow(balloons[i]->x - this->x,2)+pow(balloons[i]->y - this->y, 2));
         if (distance < closestDistance){
             closestDistance = distance;
             index = i;

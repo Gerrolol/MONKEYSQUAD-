@@ -38,18 +38,6 @@ void Balloon::move(int velocityX, int velocityY) {
     y += velocityY;
 }
 
-int Balloon::getX() const {
-    return x;
-}
-
-int Balloon::getY() const {
-    return y;
-}
-
-int Balloon::getValue(){
-    return reward;
-}
-
 void Balloon::render(SDL_Renderer* renderer) {
 
     SDL_SetRenderDrawColor(renderer, colorSDL.r, colorSDL.g, colorSDL.b, colorSDL.a);

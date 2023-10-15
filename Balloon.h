@@ -18,9 +18,6 @@ class Balloon {
 
     // Methods for balloon movement
     virtual void move(int velocityX, int velocityY);
-    int getX() const;
-    int getY() const;
-    int getValue();
 
     //for rendering 
     void setColor(SDL_Color color);
@@ -29,10 +26,11 @@ class Balloon {
 
     void render(SDL_Renderer* renderer);
 
+    int x, y;  
+
     protected:
     mutable bool popped;
     std::string color;
-    int x, y;  
     int reward;
     int hp;
     SDL_Color colorSDL;
