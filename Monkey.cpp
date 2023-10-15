@@ -27,7 +27,6 @@ int Monkey::getRange(){
 void Monkey::render(SDL_Renderer* renderer) {
     // Implement rendering logic using SDL2
     // You'll need to render the monkey's image or shape on the map
-
     // Example: rendering a simple rectangle as a placeholder
  SDL_Rect rect;
 rect.x = x2;
