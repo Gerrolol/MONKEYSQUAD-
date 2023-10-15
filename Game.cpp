@@ -91,6 +91,7 @@ void Game::handleEvents(){
             
         case SDL_MOUSEBUTTONUP:
             mouseDownStatus = 0;
+            break;
 
         default:
             break;
@@ -142,13 +143,14 @@ for (int i = 0; i< Level.listCells.size();i++){
                 case 'C':
                     std::cout<<"boom"<<std::endl;
                     float distance = 0;
-                    for (int i = 1; i< balloons.size();i++){
-                    distance = sqrt(pow(balloons[i]->x - balloons[balloonToPop]->x,2)+pow(balloons[i]->y - balloons[balloonToPop]->y, 2));
-                    if (distance < 24){
-                        balloons[i]->takeDamage(100);
+                    for (int i = 0; i< balloons.size();i++){
+                        distance = sqrt(pow(balloons[i]->x - balloons[balloonToPop]->x,2)+pow(balloons[i]->y - balloons[balloonToPop]->y, 2));
+                        if (distance < 24){
+                            balloons[i]->takeDamage(100);
+                        }
                     }
                     Level.listCells[i]->cooldown = 120;
-            }
+                    break;
             }
         }
     }
@@ -174,7 +176,7 @@ if (balloons.empty() == true && spawnCount == 20){
             }
             else {
                 balloon->move(0, 1); // Move down
-                if (balloon->y <= 610){
+                if (balloon->y >= 610){
                     isRunning = false;
                     std::cout<< "Blud got popped!"<< std::endl;
                     break;
