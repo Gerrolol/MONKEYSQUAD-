@@ -10,20 +10,16 @@ std::map<std::string, SDL_Color> Balloon::colorMap = {
 };
 
 Balloon::Balloon(const std::string& color, int value, int health) 
-: color(color), x(50), y(50), popped(false), reward(value), hp(health), radius(10){
+: color(color), x(170), y(10), popped(false), reward(value), hp(health), radius(10){
  auto colorIt = colorMap.find(color);
     if (colorIt != colorMap.end()) {
         colorSDL = colorIt->second;
     } else {
-        colorSDL = {255, 255, 255, 255}; // White
+        colorSDL = {255, 255, 255, 255}; 
     }
 } 
 
-Balloon::~Balloon() {
-        if (isPopped()==true){
-        delete this;
-    }
-}
+Balloon::~Balloon() {}
 
 std::string Balloon::getColor() const {
     return color;
@@ -63,17 +59,10 @@ int Balloon::getValue(){
     return reward;
 }
 
-SDL_Color bgColor = {0, 0, 0, 255}; // Black background
 
 void Balloon::render(SDL_Renderer* renderer) {
-    SDL_SetRenderDrawColor(renderer, bgColor.r, bgColor.g, bgColor.b, bgColor.a);
 
-    // Clear the screen with the background color
-    SDL_RenderClear(renderer);
-
-    // Set the rendering color to the balloon's color
     SDL_SetRenderDrawColor(renderer, colorSDL.r, colorSDL.g, colorSDL.b, colorSDL.a);
-
 
     // Render the filled circle
     for (int w = 0; w < radius * 2; w++) {

@@ -8,6 +8,7 @@ public:
   BlueBalloon();
   virtual ~BlueBalloon(); 
   //void pop() override;
+  void move(int velocityX, int velocityY) override;
   
 
 };

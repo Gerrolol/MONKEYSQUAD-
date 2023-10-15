@@ -19,7 +19,7 @@ class Balloon {
     //virtual void pop();
 
     // Methods for balloon movement
-    void move(int velocityX, int velocityY);
+    virtual void move(int velocityX, int velocityY);
     int getX() const;
     int getY() const;
     int getValue();

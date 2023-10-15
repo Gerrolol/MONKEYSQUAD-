@@ -29,17 +29,17 @@ Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fu
     }else{
         isRunning = false;
     }
-    RedBalloon* redBalloon = new RedBalloon();
-    balloons.push_back(redBalloon);
-    /*
-        RedBalloon* redBalloon = new RedBalloon();
+    //RedBalloon* redBalloon = new RedBalloon();
+    //balloons.push_back(redBalloon);
+    
+        //RedBalloon* redBalloon = new RedBalloon();
         BlueBalloon* blueBalloon = new BlueBalloon();
-        GreenBalloon* greenBalloon = new GreenBalloon();
+        //GreenBalloon* greenBalloon = new GreenBalloon();
 
-        balloons.push_back(new RedBalloon());
+        //balloons.push_back(new RedBalloon());
         balloons.push_back(new BlueBalloon());
-        balloons.push_back(new GreenBalloon());
-    */
+        //balloons.push_back(new GreenBalloon());
+    
     Level = Map(renderer, width / cellSize, height/ cellSize);
     for (int i=0; i<192;i++){
         Level.setCell(i,'L');
@@ -78,30 +78,43 @@ void Game::handleEvents(){
 void Game::update(){
 for (size_t i = 0; i < balloons.size(); ++i) {
         Balloon* balloon = balloons[i];
-        // Update the position of the balloon
-        balloon->move(1,0);
+    
+        if (balloon->getY() < 220 || (balloon->getX() <= 650 && balloon->getY() >= 700)) {
+            balloon->move(0, 1); // Move down
+        }
+        else if (balloon->getX() < 600 && balloon->getY() >= 220 && balloon->getY() < 400) {
+            balloon->move(1, 0); // Move right
+        }
+        else if (balloon->getY() < 400) {
+            balloon->move(0, 1); // Move down
+        }
+        else if (balloon->getY() >= 370 && balloon->getX() > 160) {
+            balloon->move(-1, 0); // Move left
+        }
+        else {
+            balloon->move(0, 1); // Move down
+        }
+        //next two lines test the balloon popping function
+        if(balloon->getX() == 500){
+            balloon->takeDamage(200);
+        }
 
-}
-}
-
-/*for (size_t i = 0; i < balloons.size(); ++i) {
-        Balloon* balloon = balloons[i];
-
-        //code the movement of the balloon here
-        //
         if (balloon->isPopped()) {
             if (balloon->getColor() == "blue") {
 
                  int poppedX = balloon->getX();
                  int poppedY = balloon->getY();
+                  std::cout << "Popped blue balloon coordinates: X=" << poppedX << ", Y=" << poppedY << std::endl;
 
                 balloons.erase(balloons.begin() + i);
                 delete balloon;
 
                 RedBalloon* newBalloon = new RedBalloon();
-                newBalloon->move(poppedX, poppedY);
+                newBalloon->move(poppedX-170, poppedY-10);
+                std::cout << "New red balloon coordinates: X=" << newBalloon->getX() << ", Y=" << newBalloon->getY() << std::endl;
                 balloons.push_back(newBalloon);
             }
+            /*
             else if (balloon->getColor() == "green") {
 
                 int poppedX = balloon->getX();
@@ -120,21 +133,19 @@ for (size_t i = 0; i < balloons.size(); ++i) {
                 balloons.erase(balloons.begin() + i);
                 delete balloon;
             }
-        }
+            */
     }
 }
-*/
+}
 
 void Game::render(){
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
-
-    balloons[0]->render(renderer);
-    //add stuff to render
-        //for (size_t i = 0; i < balloons.size(); ++i) {
-        //balloons[i]->render(renderer);
-        //}
     Level.draw(renderer, cellSize);
+    //balloons[0]->render(renderer);
+        for (size_t i = 0; i < balloons.size(); ++i) {
+        balloons[i]->render(renderer);
+        }
     SDL_RenderPresent(renderer);
 }
 
