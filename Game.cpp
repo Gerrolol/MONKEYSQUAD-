@@ -110,13 +110,10 @@ void Game::update(){
 int balloonToPop = -1;
 for (int i = 0; i< Level.listCells.size();i++){
     if (Level.listCells[i]->getType() == 'D' ||Level.listCells[i]->getType() == 'S' ||Level.listCells[i]->getType() == 'C'){
-        std::cout<<"found monkey"<<std::endl;
         balloonToPop = Level.listCells[i]->checkInRange(balloons);
         if (Level.listCells[i]->cooldown > 0){
-            std::cout<<"cooldown decreased"<<std::endl;
             Level.listCells[i]->cooldown -=1;
         }else if (balloonToPop >-1){
-            std::cout<<"Checking type"<<std::endl;
             switch (Level.listCells[i]->getType()){
                 case 'D':
                     std::cout<<"shot a dart"<<std::endl;
