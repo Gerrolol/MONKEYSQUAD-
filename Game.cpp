@@ -162,52 +162,62 @@ for (int i = 0; i< Level.listCells.size();i++){
         }
     }
 }
-for (size_t i = 0; i < balloons.size(); ++i) {
-        Balloon* balloon = balloons[i];
-    
-        if (balloon->y < 220 || (balloon->x <= 650 && balloon->y >= 700)) {
-            balloon->move(0, 1); // Move down
-        }
-        else if (balloon->x < 600 && balloon->y >= 220 && balloon->y < 400) {
-            balloon->move(1, 0); // Move right
-        }
-        else if (balloon->y < 400) {
-            balloon->move(0, 1); // Move down
-        }
-        else if (balloon->y >= 370 && balloon->x > 160) {
-            balloon->move(-1, 0); // Move left
-        }
-        else {
-            balloon->move(0, 1); // Move down
-        }
-
-        if (balloon->isPopped()) {
-            int poppedX = balloon->x;
-            int poppedY = balloon->y;
-            if (balloon->getColor() == "blue") {
-
-                balloons.erase(balloons.begin() + i);
-                delete balloon;
-                RedBalloon* newBalloon = new RedBalloon();
-                newBalloon->move(poppedX-170, poppedY-10);
-                balloons.push_back(newBalloon);
+if (balloons.empty() == true && currentWave == 3){
+    isRunning = false;
+    std::cout<< "You Won!" << std::endl;
+}else{
+    for (size_t i = 0; i < balloons.size(); ++i) {
+            Balloon* balloon = balloons[i];
+        
+            if (balloon->y < 220 || (balloon->x <= 650 && balloon->y >= 700)) {
+                balloon->move(0, 1); // Move down
             }
-            
-            else if (balloon->getColor() == "green") {
-                balloons.erase(balloons.begin() + i);
-                delete balloon;
-
-                BlueBalloon* newBalloon = new BlueBalloon();
-                newBalloon->move((poppedX-170)/1.5, (poppedY-10)/1.5);
-
-                balloons.push_back(newBalloon);
+            else if (balloon->x < 600 && balloon->y >= 220 && balloon->y < 400) {
+                balloon->move(1, 0); // Move right
+            }
+            else if (balloon->y < 400) {
+                balloon->move(0, 1); // Move down
+            }
+            else if (balloon->y >= 370 && balloon->x > 160) {
+                balloon->move(-1, 0); // Move left
+            }
+            else {
+                balloon->move(0, 1); // Move down
+                if (balloon->y <= 610){
+                    isRunning = false;
+                    std::cout<< "Blud got popped!"<< std::endl;
+                    break;
+                }
             }
 
-            else if (balloon->getColor() == "red") {
-                balloons.erase(balloons.begin() + i);
-                delete balloon;
-            }
-    }
+            if (balloon->isPopped()) {
+                int poppedX = balloon->x;
+                int poppedY = balloon->y;
+                if (balloon->getColor() == "blue") {
+
+                    balloons.erase(balloons.begin() + i);
+                    delete balloon;
+                    RedBalloon* newBalloon = new RedBalloon();
+                    newBalloon->move(poppedX-170, poppedY-10);
+                    balloons.push_back(newBalloon);
+                }
+                
+                else if (balloon->getColor() == "green") {
+                    balloons.erase(balloons.begin() + i);
+                    delete balloon;
+
+                    BlueBalloon* newBalloon = new BlueBalloon();
+                    newBalloon->move((poppedX-170)/1.5, (poppedY-10)/1.5);
+
+                    balloons.push_back(newBalloon);
+                }
+
+                else if (balloon->getColor() == "red") {
+                    balloons.erase(balloons.begin() + i);
+                    delete balloon;
+                }
+        }
+}
 }
 }
 
