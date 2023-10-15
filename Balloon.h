@@ -21,6 +21,7 @@ class Balloon {
     int getX() const;
     int getY() const;
     int getValue();
+    int getDistance();
 
     //for rendering 
     void setColor(SDL_Color color);
@@ -37,6 +38,7 @@ class Balloon {
     int hp;
     SDL_Color colorSDL;
     int radius;
+    int distance;
 };
 #endif 
 

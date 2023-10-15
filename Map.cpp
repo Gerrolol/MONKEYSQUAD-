@@ -64,15 +64,15 @@ void Map::setCell(int pos, char celltype){
             break;
         case 'D':
             delete listCells[pos];
-            newCell = new Dart;
+            newCell = new Dart((pos%16)*48 - 24,(pos/16)*48 -24);
             break;
         case 'S':
             delete listCells[pos];
-            newCell = new Sniper;
+            newCell = new Sniper((pos%16)*48 - 24,(pos/16)*48 -24);
             break;
         case 'C':
             delete listCells[pos];
-            newCell = new Cannon;
+            newCell = new Cannon((pos%16)*48 - 24,(pos/16)*48 -24);
             break;
     }
     listCells[pos] = newCell;

@@ -107,6 +107,30 @@ void Game::handleEvents(){
 }
 
 void Game::update(){
+int balloonToPop = -1;
+for (int i = 0; i< Level.listCells.size();i++){
+    if (Level.listCells[i]->getType() == 'D' ||Level.listCells[i]->getType() == 'S' ||Level.listCells[i]->getType() == 'C'){
+        balloonToPop = Level.listCells[i]->checkInRange(balloons);
+        if (balloonToPop >-1){
+            switch (Level.listCells[i]->getType()){
+                case 'D':
+                    balloons[balloonToPop]->takeDamage(100);
+                    break;
+                case 'S':
+                    balloons[balloonToPop]->takeDamage(300);
+                    break;
+                case 'C':
+                    int distance = 0;
+                    for (int i = 1; i< balloons.size();i++){
+                    distance = sqrt(pow(balloons[i]->getX() - Level.listCells[i]->x,2)+pow(balloons[i]->getY() - Level.listCells[i]->y, 2));
+                    if (distance < 24){
+                        balloons[i]->takeDamage(100);
+                    }
+            }
+            }
+        }
+    }
+}
 for (size_t i = 0; i < balloons.size(); ++i) {
         Balloon* balloon = balloons[i];
     
