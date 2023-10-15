@@ -5,7 +5,7 @@
 
 class Sniper : public Monkey {
 public:
-     Sniper();
+     Sniper(int x, int y);
      virtual ~Sniper();
 
 

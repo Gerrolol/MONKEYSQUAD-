@@ -5,7 +5,7 @@
 
 class Dart : public Monkey {
 public:
-     Dart();
+     Dart(int x,int y);
      virtual ~Dart();
 
 

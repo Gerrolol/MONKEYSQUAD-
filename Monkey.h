@@ -20,6 +20,10 @@ class Monkey {
 
         void render(SDL_Renderer* renderer);
 
+        int checkInRange(Balloon& array); 
+
+        int x,y;
+
     protected:
         int damage;
         int range;
