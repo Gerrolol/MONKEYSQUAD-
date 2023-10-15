@@ -137,6 +137,7 @@ for (int i = 0; i< Level.listCells.size();i++){
 }
 if (balloons.empty() == true && currentWave == 3){
     isRunning = false;
+    std::cout<< "You Won!" << std::endl;
 }else{
     for (size_t i = 0; i < balloons.size(); ++i) {
             Balloon* balloon = balloons[i];
@@ -157,6 +158,7 @@ if (balloons.empty() == true && currentWave == 3){
                 balloon->move(0, 1); // Move down
                 if (balloon->y <= 610){
                     isRunning = false;
+                    std::cout<< "Blud got popped!"<< std::endl;
                     break;
                 }
             }
