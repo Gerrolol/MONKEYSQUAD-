@@ -9,6 +9,9 @@
 #include "pathTile.h"
 #include "Land.h"
 #include "water.h"
+#include "dart.h"
+#include "sniper.h"
+#include "cannon.h"
 
 class Map{
     public:

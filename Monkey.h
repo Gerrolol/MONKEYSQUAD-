@@ -5,8 +5,9 @@
 #include <SDL2/SDL.h>
 #include <map>
 #include "Balloon.h"
+#include "cell.h"
 
-class Monkey {
+class Monkey :public Cell{
     public:
         Monkey(int atkspeed, int range, int damage);
 

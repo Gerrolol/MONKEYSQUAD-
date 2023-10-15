@@ -62,6 +62,18 @@ void Map::setCell(int pos, char celltype){
             delete listCells[pos];
             newCell = new Water;
             break;
+        case 'D':
+            delete listCells[pos];
+            newCell = new Dart;
+            break;
+        case 'S':
+            delete listCells[pos];
+            newCell = new Sniper;
+            break;
+        case 'C':
+            delete listCells[pos];
+            newCell = new Cannon;
+            break;
     }
     listCells[pos] = newCell;
 }
