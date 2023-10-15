@@ -28,7 +28,6 @@ int Cell::checkInRange(std::vector<Balloon*> balloons){
         if (closestDistance > this->range){
             return -1;
         }
-        std::cout<<closestDistance<<std::endl;
     }
     return index;
  }

@@ -15,7 +15,7 @@ class Game{
     void update();
     void render();
     void clean();
-
+    
     bool running(){return isRunning;}
 
     private:
@@ -26,6 +26,8 @@ class Game{
     Map Level;
     int mouseDownStatus = 0;
     char MonkeyTypeChosen;
+    int balloonSpawnTimer = 0; 
+    int spawnCount =0;
 
 };
 

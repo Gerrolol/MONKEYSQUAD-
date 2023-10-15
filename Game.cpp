@@ -9,16 +9,6 @@ std::vector<Balloon*> balloons;
 
 Game::~Game(){}
 
-struct Wave {
-    std::string balloonType;
-    int numBalloons;
-};
-std::vector<Wave> waves;
-int currentWave = 0;
-int balloonsInWave = 0;
-bool isWaveActive = false;
-int waveCooldown = 300;  // Cooldown between waves (adjust as needed)
-int timeElapsedInWave = 0;
 
 Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fullscreen){
     int flags = 0;
@@ -40,21 +30,6 @@ Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fu
     }else{
         isRunning = false;
     }
-        Wave wave1 = {"red", 10};   // Wave 1: 10 red balloons
-        Wave wave2 = {"blue", 15};  // Wave 2: 15 blue balloons
-        Wave wave3 = {"green", 20}; // Wave 3: 20 green balloons
-
-        waves.push_back(wave1);
-        waves.push_back(wave2);
-        waves push_back(wave3);
-
-        RedBalloon* redBalloon = new RedBalloon();
-        BlueBalloon* blueBalloon = new BlueBalloon();
-        GreenBalloon* greenBalloon = new GreenBalloon();
-
-        balloons.push_back(new RedBalloon());
-        balloons.push_back(new BlueBalloon());
-        balloons.push_back(new GreenBalloon());
     
     Level = Map(renderer, width / cellSize, height/ cellSize);
     for (int i=0; i<192;i++){
@@ -124,14 +99,28 @@ void Game::handleEvents(){
 
 
 void Game::update(){
-            if (isWaveActive) {
-            if (balloonsSpawnedInWave < waves[currentWave].numBalloons) {
-                spawnBalloon(waves[currentWave].balloonType);
-                balloonsSpawnedInWave++;
-            } else {
-                endWave();
-            }
-        }
+
+    balloonSpawnTimer++;
+    if (balloonSpawnTimer >= 60 && spawnCount <10) {
+        RedBalloon* redBalloon = new RedBalloon();
+        balloons.push_back(redBalloon);
+        balloonSpawnTimer = 0; 
+        spawnCount++;
+    }
+    if(spawnCount >= 10 && spawnCount < 15 && balloonSpawnTimer >=60){
+        BlueBalloon* blueBalloon = new BlueBalloon();
+        balloons.push_back(blueBalloon);
+        balloonSpawnTimer =0;
+        spawnCount++;
+    }
+        if(spawnCount >= 15 && spawnCount < 20 && balloonSpawnTimer >=60){
+        GreenBalloon* greenBalloon = new GreenBalloon();
+        balloons.push_back(greenBalloon);
+        balloonSpawnTimer =0;
+        spawnCount++;
+    }
+    
+
 int balloonToPop = -1;
 for (int i = 0; i< Level.listCells.size();i++){
     if (Level.listCells[i]->getType() == 'D' ||Level.listCells[i]->getType() == 'S' ||Level.listCells[i]->getType() == 'C'){
@@ -146,13 +135,15 @@ for (int i = 0; i< Level.listCells.size();i++){
                     Level.listCells[i]->cooldown = 90;
                     break;
                 case 'S':
+                    std::cout<<"SNIPE"<<std::endl;
                     balloons[balloonToPop]->takeDamage(300);
                     Level.listCells[i]->cooldown = 180;
                     break;
                 case 'C':
+                    std::cout<<"boom"<<std::endl;
                     float distance = 0;
                     for (int i = 1; i< balloons.size();i++){
-                    distance = sqrt(pow(balloons[i]->x - Level.listCells[i]->x,2)+pow(balloons[i]->y - Level.listCells[i]->y, 2));
+                    distance = sqrt(pow(balloons[i]->x - balloons[balloonToPop]->x,2)+pow(balloons[i]->y - balloons[balloonToPop]->y, 2));
                     if (distance < 24){
                         balloons[i]->takeDamage(100);
                     }
@@ -162,7 +153,7 @@ for (int i = 0; i< Level.listCells.size();i++){
         }
     }
 }
-if (balloons.empty() == true && currentWave == 3){
+if (balloons.empty() == true && spawnCount == 20){
     isRunning = false;
     std::cout<< "You Won!" << std::endl;
 }else{
