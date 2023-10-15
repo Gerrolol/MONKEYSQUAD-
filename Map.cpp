@@ -49,6 +49,7 @@ void Map::drawCell(SDL_Renderer* renderer, int pos, int tilesize){
 }
 
 void Map::setCell(int pos, char celltype){
+    int xVal,yVal = 0;
     switch (celltype){
         case 'L':
             delete listCells[pos];
@@ -64,15 +65,19 @@ void Map::setCell(int pos, char celltype){
             break;
         case 'D':
             delete listCells[pos];
-            newCell = new Dart((pos%16)*48 - 24,(pos/16)*48 -24);
+            xVal = pos%16;
+            xVal = xVal*48 -24;
+            yVal = (pos/16)+1;
+            yVal = yVal*48 - 24;
+            newCell = new Dart(xVal, yVal);
             break;
         case 'S':
             delete listCells[pos];
-            newCell = new Sniper((pos%16)*48 - 24,(pos/16)*48 -24);
+            newCell = new Sniper((pos%16)*48 - 24,((pos/16)+1)*48 -24);
             break;
         case 'C':
             delete listCells[pos];
-            newCell = new Cannon((pos%16)*48 - 24,(pos/16)*48 -24);
+            newCell = new Cannon((pos%16)*48 - 24,((pos/16)+1)*48 -24);
             break;
     }
     listCells[pos] = newCell;

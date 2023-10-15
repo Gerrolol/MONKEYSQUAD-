@@ -30,10 +30,7 @@ void Balloon::takeDamage(int damage){
 }
 
 bool Balloon::isPopped() const {
-    if (hp <= 0){
-        popped = true;
-    }
-    return popped;
+    return hp <= 0;
 }
 
 

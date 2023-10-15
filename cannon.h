@@ -5,7 +5,7 @@
 class Cannon : public Monkey {
 public:
      Cannon(int x, int y);
-     virtual ~Cannon();
+     ~Cannon();
 
 
 };

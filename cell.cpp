@@ -2,6 +2,7 @@
 
 Cell::Cell(){
     type = 'E';
+    range = 0;
 }
 
 Cell::~Cell(){}
@@ -20,7 +21,7 @@ int Cell::checkInRange(std::vector<Balloon*> balloons){
             closestDistance = distance;
             index = i;
         }
-        if (closestDistance > range){
+        if (closestDistance > this->range){
             return -1;
         }
     }
