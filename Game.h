@@ -25,7 +25,7 @@ class Game{
     const int cellSize = 48;
     Map Level;
     int mouseDownStatus = 0;
-    std::string MonkeyTypeChosen;
+    char MonkeyTypeChosen;
 
 };
 
