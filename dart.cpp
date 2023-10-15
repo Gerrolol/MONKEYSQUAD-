@@ -1,6 +1,6 @@
 #include "dart.h"
 
-Dart::Dart(int x, int y) : Monkey(20 ,150, 20) {
+Dart::Dart(int x, int y) : Monkey(20 ,100, 20) {
     this->x = x;
     this->y = y;
     this->type = 'D';

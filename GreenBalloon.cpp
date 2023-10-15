@@ -7,6 +7,6 @@
   }
 
   void GreenBalloon::move(int velocityX, int velocityY){
-    this->x += 3*velocityX;
-    this->y += 3*velocityY;
+    this->x += 2*velocityX;
+    this->y += 2*velocityY;
 }

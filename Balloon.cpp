@@ -10,7 +10,7 @@ std::map<std::string, SDL_Color> Balloon::colorMap = {
 };
 
 Balloon::Balloon(const std::string& color, int value, int health) 
-: color(color), x(170), y(10),distance(0), popped(false), reward(value), hp(health), radius(10){
+: color(color), x(170), y(10), popped(false), reward(value), hp(health), radius(10){
  auto colorIt = colorMap.find(color);
     if (colorIt != colorMap.end()) {
         colorSDL = colorIt->second;
@@ -33,29 +33,10 @@ bool Balloon::isPopped() const {
     return hp <= 0;
 }
 
-
 void Balloon::move(int velocityX, int velocityY) {
     x += velocityX;
     y += velocityY;
-    distance = distance + velocityX + velocityY; 
 }
-
-int Balloon::getDistance(){
-    return distance;
-}
-
-int Balloon::getX() const {
-    return x;
-}
-
-int Balloon::getY() const {
-    return y;
-}
-
-int Balloon::getValue(){
-    return reward;
-}
-
 
 void Balloon::render(SDL_Renderer* renderer) {
 

@@ -29,8 +29,6 @@ Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fu
     }else{
         isRunning = false;
     }
-    //RedBalloon* redBalloon = new RedBalloon();
-    //balloons.push_back(redBalloon);
     
         RedBalloon* redBalloon = new RedBalloon();
         BlueBalloon* blueBalloon = new BlueBalloon();
@@ -118,7 +116,7 @@ for (int i = 0; i< Level.listCells.size();i++){
                 case 'D':
                     std::cout<<"shot a dart"<<std::endl;
                     balloons[balloonToPop]->takeDamage(100);
-                    Level.listCells[i]->cooldown = 60;
+                    Level.listCells[i]->cooldown = 90;
                     break;
                 case 'S':
                     balloons[balloonToPop]->takeDamage(300);
@@ -127,7 +125,7 @@ for (int i = 0; i< Level.listCells.size();i++){
                 case 'C':
                     float distance = 0;
                     for (int i = 1; i< balloons.size();i++){
-                    distance = sqrt(pow(balloons[i]->getX() - Level.listCells[i]->x,2)+pow(balloons[i]->getY() - Level.listCells[i]->y, 2));
+                    distance = sqrt(pow(balloons[i]->x - Level.listCells[i]->x,2)+pow(balloons[i]->y - Level.listCells[i]->y, 2));
                     if (distance < 24){
                         balloons[i]->takeDamage(100);
                     }
@@ -140,16 +138,16 @@ for (int i = 0; i< Level.listCells.size();i++){
 for (size_t i = 0; i < balloons.size(); ++i) {
         Balloon* balloon = balloons[i];
     
-        if (balloon->getY() < 220 || (balloon->getX() <= 650 && balloon->getY() >= 700)) {
+        if (balloon->y < 220 || (balloon->x <= 650 && balloon->y >= 700)) {
             balloon->move(0, 1); // Move down
         }
-        else if (balloon->getX() < 600 && balloon->getY() >= 220 && balloon->getY() < 400) {
+        else if (balloon->x < 600 && balloon->y >= 220 && balloon->y < 400) {
             balloon->move(1, 0); // Move right
         }
-        else if (balloon->getY() < 400) {
+        else if (balloon->y < 400) {
             balloon->move(0, 1); // Move down
         }
-        else if (balloon->getY() >= 370 && balloon->getX() > 160) {
+        else if (balloon->y >= 370 && balloon->x > 160) {
             balloon->move(-1, 0); // Move left
         }
         else {
@@ -157,31 +155,23 @@ for (size_t i = 0; i < balloons.size(); ++i) {
         }
 
         if (balloon->isPopped()) {
+            int poppedX = balloon->x;
+            int poppedY = balloon->y;
             if (balloon->getColor() == "blue") {
-
-                 int poppedX = balloon->getX();
-                 int poppedY = balloon->getY();
-                  std::cout << "Popped blue balloon coordinates: X=" << poppedX << ", Y=" << poppedY << std::endl;
 
                 balloons.erase(balloons.begin() + i);
                 delete balloon;
-
                 RedBalloon* newBalloon = new RedBalloon();
                 newBalloon->move(poppedX-170, poppedY-10);
-                std::cout << "New red balloon coordinates: X=" << newBalloon->getX() << ", Y=" << newBalloon->getY() << std::endl;
                 balloons.push_back(newBalloon);
             }
             
             else if (balloon->getColor() == "green") {
-
-                int poppedX = balloon->getX();
-                int poppedY = balloon->getY();
-
                 balloons.erase(balloons.begin() + i);
                 delete balloon;
 
                 BlueBalloon* newBalloon = new BlueBalloon();
-                newBalloon->move(poppedX-170, poppedY-10);
+                newBalloon->move((poppedX-170)/1.5, (poppedY-10)/1.5);
 
                 balloons.push_back(newBalloon);
             }
@@ -190,7 +180,6 @@ for (size_t i = 0; i < balloons.size(); ++i) {
                 balloons.erase(balloons.begin() + i);
                 delete balloon;
             }
-            
     }
 }
 }
