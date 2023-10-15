@@ -2,15 +2,17 @@
 #include <SDL2/SDL.h>
 #include <chrono>
 #include "Game.h"
-
 Game *game = nullptr;
 
 int main(int argc, char* argv[]) {
+    //starts instance of game;
     game = new Game("Balloons Tower Defense", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
+    //starts the clock to calculate the game time
     auto time1 = std::chrono::system_clock::now();
     auto time2 = std::chrono::system_clock::now();
     const float dT = 1.0f/60.0f;
 
+    //starts game loop
     while (game-> running())
     {
         time2 = std::chrono::system_clock::now();

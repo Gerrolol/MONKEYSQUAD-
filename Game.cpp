@@ -9,7 +9,7 @@ std::vector<Balloon*> balloons;
 
 Game::~Game(){}
 
-
+//creates game window and sets initial map.
 Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fullscreen){
     int flags = 0;
     if (fullscreen){
@@ -50,10 +50,12 @@ void Game::handleEvents(){
     SDL_Event event;
     SDL_PollEvent (&event);
     switch (event.type){
+        //exit buton to exit
         case SDL_QUIT:
             isRunning = false;
             break;
         
+        //when left click, checks if cell is a land, and if it is will prompt user on what type of monkey they would like to place
         case SDL_MOUSEBUTTONDOWN:
             if (event.button.button == SDL_BUTTON_LEFT){
                 mouseDownStatus = SDL_BUTTON_LEFT;
@@ -65,9 +67,11 @@ void Game::handleEvents(){
                     std::cout << "S for Sniper, D for darts, C for Cannon." << std::endl;
                     std::cin >> MonkeyTypeChosen;
                     while (MonkeyTypeChosen!='D'&&MonkeyTypeChosen!='S'&&MonkeyTypeChosen!='C'){
+                        //prompts user to try again to input id input is wrong
                         std::cout << "Invalid choice, try again: " << std::endl;
                         std::cin >> MonkeyTypeChosen;
                     }
+                    //sets cell at location of mouse to desired monkey type.
                     switch (MonkeyTypeChosen) {
                     case 'D':
                         std::cout << "Dart Placed." << std::endl;
@@ -85,11 +89,13 @@ void Game::handleEvents(){
                         break;
                     }
                 }else{
+                    //warning if the player clicks on a non-grass tile.
                     std::cout<< "You can only place on grass!"<< std::endl;
                 }
             }
             
         case SDL_MOUSEBUTTONUP:
+            //resets the mouse button status
             mouseDownStatus = 0;
             break;
 
@@ -123,12 +129,15 @@ void Game::update(){
     
 
 int balloonToPop = -1;
+//loops through list of cells and finds monkeys
 for (int i = 0; i< Level.listCells.size();i++){
     if (Level.listCells[i]->getType() == 'D' ||Level.listCells[i]->getType() == 'S' ||Level.listCells[i]->getType() == 'C'){
+        //check if monkey is on cooldown
         balloonToPop = Level.listCells[i]->checkInRange(balloons);
         if (Level.listCells[i]->cooldown > 0){
             Level.listCells[i]->cooldown -=1;
         }else if (balloonToPop >-1){
+            //checks type of monkey and shoots accordingly, then resets cooldown
             switch (Level.listCells[i]->getType()){
                 case 'D':
                     std::cout<<"shot a dart"<<std::endl;
@@ -155,6 +164,7 @@ for (int i = 0; i< Level.listCells.size();i++){
         }
     }
 }
+//win condition - all balloons spawned and dead.
 if (balloons.empty() == true && spawnCount == 20){
     isRunning = false;
     std::cout<< "You Won!" << std::endl;
@@ -215,6 +225,7 @@ if (balloons.empty() == true && spawnCount == 20){
 }
 
 void Game::render(){
+    //reders the updates screen
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
     Level.draw(renderer, cellSize);

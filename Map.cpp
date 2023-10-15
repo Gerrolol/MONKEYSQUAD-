@@ -1,6 +1,6 @@
 #include "Map.h"
 Map::Map(){};
-
+//on initialisation creates the textures needed and sets variables.
 Map::Map(SDL_Renderer* renderer, int nCellCols, int nCellRows):
     nRows(nCellRows),
     nCols(nCellCols){ 
@@ -17,13 +17,13 @@ Map::Map(SDL_Renderer* renderer, int nCellCols, int nCellRows):
     listCells.resize(mapSize, nullptr);
 }
 
-
+//loops through each cell and runs the drawcell command
 void Map::draw(SDL_Renderer *renderer, int tilesize){
     for(int i =0; i<listCells.size();i++){
         drawCell(renderer,i,tilesize);
     }
 }
-
+//checks the cell type to know what texture to use
 void Map::drawCell(SDL_Renderer* renderer, int pos, int tilesize){
     SDL_Texture* textureSelected = textureLand;
     if(listCells[pos]->getType() == 'L'){
@@ -44,10 +44,12 @@ void Map::drawCell(SDL_Renderer* renderer, int pos, int tilesize){
     else if(listCells[pos]->getType() == 'S'){
         textureSelected = textureSniper;
     }
+    //renders the texture in correct position and size
     SDL_Rect rect = {((pos%16))*tilesize, (pos/16)*tilesize,tilesize,tilesize};
     SDL_RenderCopy(renderer, textureSelected,NULL, &rect);
 }
 
+//checks for what type of cell to set to, deletes the old cell at location then creates new cell of desired type.
 void Map::setCell(int pos, char celltype){
     int xVal,yVal = 0;
     switch (celltype){

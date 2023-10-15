@@ -15,6 +15,7 @@ int Cell::checkInRange(std::vector<Balloon*> balloons){
     if(balloons.empty()){
         return -1;
     }
+    //calculates closest distance from tower to each balloon
     int closestDistance = sqrt(pow(balloons[0]->x - this->x,2)+pow(balloons[0]->y - this->y, 2));
     int index = 0;
     float distance = 0;
@@ -29,5 +30,6 @@ int Cell::checkInRange(std::vector<Balloon*> balloons){
             return -1;
         }
     }
+    //returns index of closest balloon;
     return index;
  }
