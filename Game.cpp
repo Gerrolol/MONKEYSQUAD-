@@ -68,30 +68,33 @@ void Game::handleEvents(){
                 mouseDownStatus = SDL_BUTTON_LEFT;
                 int mouseX = event.button.x;
                 int mouseY = event.button.y;
-                int mousePos = mouseX/48 + mouseY*16/48;
+                int mousePos = mouseX/48 + mouseY*16/48 + 1;
                 if (Level.listCells[mousePos]->getType() == 'L')
                     std::cout << "Which Monkey?" << std::endl;
                     std::cout << "S for Sniper, D for darts, C for Cannon." << std::endl;
                     std::cin >> MonkeyTypeChosen;
-                while (true){
-                    switch (MonkeyTypeChosen) {
-                    case 'D':
-                        std::cout << "Dart Placed." << std::endl;
-                        Level.setCell(mousePos,'D');
-                        break;
-                    case 'C':
-                        std::cout << "Cannon Placed." << std::endl;
-                        Level.setCell(mousePos,'C');
-                        break;
-                    case 'S':
-                        std::cout << "Sniper." << std::endl;
-                        Level.setCell(mousePos,'S');
-                        break;
-                    default:
-                        std::cout << "Invalid choice, try again: " << std::endl;
+                while (MonkeyTypeChosen!='D'&&MonkeyTypeChosen!='S'&&MonkeyTypeChosen!='C'){
+                    std::cout << "Invalid choice, try again: " << std::endl;
+                    std::cin >> MonkeyTypeChosen;
+                }
+                switch (MonkeyTypeChosen) {
+                case 'D':
+                    std::cout << "Dart Placed." << std::endl;
+                    Level.setCell(mousePos,'D');
+                    break;
+                case 'C':
+                    std::cout << "Cannon Placed." << std::endl;
+                    Level.setCell(mousePos,'C');
+                    break;
+                case 'S':
+                    std::cout << "Sniper." << std::endl;
+                    Level.setCell(mousePos,'S');
+                    break;
+                default:
+                    break;
                 }
                 }
-            }
+            
         case SDL_MOUSEBUTTONUP:
             mouseDownStatus = 0;
 
