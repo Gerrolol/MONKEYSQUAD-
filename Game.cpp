@@ -94,10 +94,6 @@ for (size_t i = 0; i < balloons.size(); ++i) {
         else {
             balloon->move(0, 1); // Move down
         }
-        //next two lines test the balloon popping function
-        if(balloon->getX() == 500){
-            balloon->takeDamage(200);
-        }
 
         if (balloon->isPopped()) {
             if (balloon->getColor() == "blue") {
