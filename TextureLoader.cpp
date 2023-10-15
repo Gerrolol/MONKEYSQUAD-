@@ -19,7 +19,6 @@ SDL_Texture* TextureLoader::loadTexture(SDL_Renderer* renderer, std::string file
             
                 //Add the texture to map
                 texturesLoaded[filename] = textureOutput;
-                std::cout<<"texture created"<<filename<<std::endl;
                 return textureOutput;
             }
         }

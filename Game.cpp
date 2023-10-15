@@ -72,6 +72,7 @@ void Game::handleEvents(){
                 if (Level.listCells[mousePos]->getType() == 'L'){
                     std::cout << "Which Monkey?" << std::endl;
                     std::cout << "S for Sniper, D for darts, C for Cannon." << std::endl;
+                    std::cout << balloons.size() << std::endl;
                     std::cin >> MonkeyTypeChosen;
                     while (MonkeyTypeChosen!='D'&&MonkeyTypeChosen!='S'&&MonkeyTypeChosen!='C'){
                         std::cout << "Invalid choice, try again: " << std::endl;
@@ -124,7 +125,7 @@ for (int i = 0; i< Level.listCells.size();i++){
                     Level.listCells[i]->cooldown = 180;
                     break;
                 case 'C':
-                    int distance = 0;
+                    float distance = 0;
                     for (int i = 1; i< balloons.size();i++){
                     distance = sqrt(pow(balloons[i]->getX() - Level.listCells[i]->x,2)+pow(balloons[i]->getY() - Level.listCells[i]->y, 2));
                     if (distance < 24){
