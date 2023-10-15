@@ -31,7 +31,7 @@ void Map::drawCell(SDL_Renderer* renderer, int pos, int tilesize){
     else if(listCells[pos]->getType() == 'P'){
         textureSelected = texturePath;
     }
-    SDL_Rect rect = {((pos%16))*tilesize, (pos/12)*tilesize,tilesize,tilesize};
+    SDL_Rect rect = {((pos%16))*tilesize, (pos/16)*tilesize,tilesize,tilesize};
     SDL_RenderCopy(renderer, textureSelected,NULL, &rect);
 }
 

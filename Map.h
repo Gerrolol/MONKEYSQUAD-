@@ -16,10 +16,11 @@ class Map{
     Map(SDL_Renderer* renderer, int nCellRows, int nCellCols);
     void draw(SDL_Renderer *renderer, int tilesize); //draws whole map
     void setCell(int pos, char celltype); //sets cell to type( inherited type)
+    std::vector<Cell*> listCells; // vector of cells
     
     private:
     void drawCell(SDL_Renderer* renderer, int pos, int tilesize); //draw individual cell
-    std::vector<Cell*> listCells; // vector of cells
+    
     int nRows,nCols;
     Cell* newCell;
 
