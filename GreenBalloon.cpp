@@ -1,6 +1,7 @@
   #include "GreenBalloon.h"
   
-  GreenBalloon::GreenBalloon() : Balloon("green", 40, 300){
+  //sets color to green and health to 300
+  GreenBalloon::GreenBalloon() : Balloon("green", 300){
   }
 
   GreenBalloon::~GreenBalloon(){

@@ -7,16 +7,15 @@
 
 class Balloon {
     public:
-    Balloon(const std::string& color, int value, int health);
+    Balloon(const std::string& color, int health);
     virtual ~Balloon();
 
     std::string getColor() const;
     
-    bool isPopped() const;
+    bool isPopped();
 
     void takeDamage(int damage);
 
-    // Methods for balloon movement
     virtual void move(int velocityX, int velocityY);
 
     //for rendering 
@@ -26,12 +25,12 @@ class Balloon {
 
     void render(SDL_Renderer* renderer);
 
+    //coordinates of balloon
     float x, y;  
 
     protected:
-    mutable bool popped;
+    bool popped;
     std::string color;
-    int reward;
     int hp;
     SDL_Color colorSDL;
     int radius;

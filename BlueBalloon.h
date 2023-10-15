@@ -7,8 +7,7 @@ class BlueBalloon : public Balloon{
 public:
   BlueBalloon();
   virtual ~BlueBalloon(); 
-  //void pop() override;
-  void move(int velocityX, int velocityY) override;
+  void move(int velocityX, int velocityY) override; //overrides as velocity of blue balloon is larger
   
 
 };

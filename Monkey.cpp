@@ -9,5 +9,5 @@
 Monkey::Monkey(int atkspeed, int range, int damage)
     : atkspeed(atkspeed), damage(damage) {
         this->range = range;
-    // Initialize the monkey's properties
+    // Initialize the monkey's properties, inheriting range from cell.
 }

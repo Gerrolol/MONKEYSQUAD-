@@ -5,6 +5,7 @@
 #include "GreenBalloon.h"
 #include <vector>
 
+//creates a vector which stores pointers to balloon objects
 std::vector<Balloon*> balloons; 
 
 Game::~Game(){}
@@ -101,18 +102,19 @@ void Game::handleEvents(){
 void Game::update(){
 
     balloonSpawnTimer++;
+    //spawns red balloon if after 60 updates and less than 10 spawned
     if (balloonSpawnTimer >= 60 && spawnCount <10) {
-        RedBalloon* redBalloon = new RedBalloon();
-        balloons.push_back(redBalloon);
-        balloonSpawnTimer = 0; 
-        spawnCount++;
-    }
+        RedBalloon* redBalloon = new RedBalloon(); //create a red balloon object and add pointer to Balloons vector
+        balloons.push_back(redBalloon); //appends redballoon pointer to end of balloons vector
+        balloonSpawnTimer = 0; //reset 
+        spawnCount++; //increase number of balloons by 1
+    } // spawns 5 blue balloons
     if(spawnCount >= 10 && spawnCount < 15 && balloonSpawnTimer >=60){
         BlueBalloon* blueBalloon = new BlueBalloon();
         balloons.push_back(blueBalloon);
         balloonSpawnTimer =0;
         spawnCount++;
-    }
+    } //spawns 5 green balloons
         if(spawnCount >= 15 && spawnCount < 20 && balloonSpawnTimer >=60){
         GreenBalloon* greenBalloon = new GreenBalloon();
         balloons.push_back(greenBalloon);
@@ -153,6 +155,7 @@ for (int i = 0; i< Level.listCells.size();i++){
         }
     }
 }
+// win condition,
 if (balloons.empty() == true && spawnCount == 20){
     isRunning = false;
     std::cout<< "You Won!" << std::endl;
@@ -174,21 +177,22 @@ if (balloons.empty() == true && spawnCount == 20){
             }
             else {
                 balloon->move(0, 1); // Move down
-                if (balloon->y <= 610){
+                if (balloon->y <= 610){ // if it reaches this y-value end game.
                     isRunning = false;
-                    std::cout<< "Blud got popped!"<< std::endl;
+                    std::cout<< "Blud got popped!"<< std::endl; 
                     break;
                 }
-            }
-
+            }   
+            //checks if balloon is popped and moves a new balloon to the popped location.
             if (balloon->isPopped()) {
                 int poppedX = balloon->x;
                 int poppedY = balloon->y;
                 if (balloon->getColor() == "blue") {
-
+                    //erases the balloon at that index of the arrray
                     balloons.erase(balloons.begin() + i);
                     delete balloon;
                     RedBalloon* newBalloon = new RedBalloon();
+                    //170,10 is the starting position thus is subctracted
                     newBalloon->move(poppedX-170, poppedY-10);
                     balloons.push_back(newBalloon);
                 }
@@ -202,7 +206,7 @@ if (balloons.empty() == true && spawnCount == 20){
 
                     balloons.push_back(newBalloon);
                 }
-
+        
                 else if (balloon->getColor() == "red") {
                     balloons.erase(balloons.begin() + i);
                     delete balloon;
@@ -216,7 +220,7 @@ void Game::render(){
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
     Level.draw(renderer, cellSize);
-    //balloons[0]->render(renderer);
+        //renders balloons
         for (size_t i = 0; i < balloons.size(); ++i) {
         balloons[i]->render(renderer);
         }

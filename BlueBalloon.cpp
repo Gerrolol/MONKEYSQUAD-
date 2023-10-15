@@ -1,7 +1,8 @@
 #include "BlueBalloon.h"
 #include "RedBalloon.h"
 
-BlueBalloon::BlueBalloon() : Balloon("blue", 20, 200){
+//creates a blue balloon with 200 health
+BlueBalloon::BlueBalloon() : Balloon("blue", 200){
 }
 
 BlueBalloon::~BlueBalloon() {}

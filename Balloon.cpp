@@ -3,36 +3,41 @@
 #include <map>
 #include <SDL2/SDL.h>
 
+//creates the blue, red, green color possibilites
 std::map<std::string, SDL_Color> Balloon::colorMap = {
     {"blue", {0, 0, 255, 255}},
     {"red", {255, 0, 0, 255}},
     {"green", {0, 255, 0, 255}}
 };
 
-Balloon::Balloon(const std::string& color, int value, int health) 
-: color(color), x(170), y(10), popped(false), reward(value), hp(health), radius(10){
- auto colorIt = colorMap.find(color);
-    if (colorIt != colorMap.end()) {
+//Default balloon constructor 
+Balloon::Balloon(const std::string& color, int health) 
+: color(color), x(170), y(10), popped(false), hp(health), radius(10){
+ auto colorIt = colorMap.find(color); //checks if color is in color map.
+    if (colorIt != colorMap.end()) { 
         colorSDL = colorIt->second;
-    } else {
-        colorSDL = {255, 255, 255, 255}; 
-    }
-} 
+    } 
+}
 
+//destructor
 Balloon::~Balloon() {}
 
+// returns color of balloon
 std::string Balloon::getColor() const {
     return color;
 }
 
+//subtract damage from hp of balloon
 void Balloon::takeDamage(int damage){
     hp = hp - damage;
 }
 
-bool Balloon::isPopped() const {
+//return true if balloon is popped otherwise returns false
+bool Balloon::isPopped(){
     return hp <= 0;
 }
 
+//moves the balloon by adding X-velocity and y-velocity
 void Balloon::move(int velocityX, int velocityY) {
     x += velocityX;
     y += velocityY;
