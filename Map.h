@@ -26,9 +26,10 @@ class Map{
     SDL_Texture *textureWater = nullptr,
     *texturePath = nullptr,
     *textureLand = nullptr,
-    *textureSpikedLand = nullptr,
-    *textureDartMonkey = nullptr,
-    *textureBomb = nullptr,
+    
+    *textureDart = nullptr,
+    *textureCannon = nullptr,
     *textureSniper = nullptr;
+
 };
 #endif

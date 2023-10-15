@@ -32,13 +32,13 @@ Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fu
     //RedBalloon* redBalloon = new RedBalloon();
     //balloons.push_back(redBalloon);
     
-        //RedBalloon* redBalloon = new RedBalloon();
+        RedBalloon* redBalloon = new RedBalloon();
         BlueBalloon* blueBalloon = new BlueBalloon();
-        //GreenBalloon* greenBalloon = new GreenBalloon();
+        GreenBalloon* greenBalloon = new GreenBalloon();
 
-        //balloons.push_back(new RedBalloon());
+        balloons.push_back(new RedBalloon());
         balloons.push_back(new BlueBalloon());
-        //balloons.push_back(new GreenBalloon());
+        balloons.push_back(new GreenBalloon());
     
     Level = Map(renderer, width / cellSize, height/ cellSize);
     for (int i=0; i<192;i++){
@@ -114,7 +114,7 @@ for (size_t i = 0; i < balloons.size(); ++i) {
                 std::cout << "New red balloon coordinates: X=" << newBalloon->getX() << ", Y=" << newBalloon->getY() << std::endl;
                 balloons.push_back(newBalloon);
             }
-            /*
+            
             else if (balloon->getColor() == "green") {
 
                 int poppedX = balloon->getX();
@@ -124,7 +124,7 @@ for (size_t i = 0; i < balloons.size(); ++i) {
                 delete balloon;
 
                 BlueBalloon* newBalloon = new BlueBalloon();
-                newBalloon->move(poppedX, poppedY);
+                newBalloon->move(poppedX-170, poppedY-10);
 
                 balloons.push_back(newBalloon);
             }
@@ -133,7 +133,7 @@ for (size_t i = 0; i < balloons.size(); ++i) {
                 balloons.erase(balloons.begin() + i);
                 delete balloon;
             }
-            */
+            
     }
 }
 }

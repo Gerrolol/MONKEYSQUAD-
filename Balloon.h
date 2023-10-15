@@ -16,8 +16,6 @@ class Balloon {
 
     void takeDamage(int damage);
 
-    //virtual void pop();
-
     // Methods for balloon movement
     virtual void move(int velocityX, int velocityY);
     int getX() const;

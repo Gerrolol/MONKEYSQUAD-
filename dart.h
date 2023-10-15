@@ -1,18 +1,13 @@
 #ifndef DART_H
 #define DART_H
-#include <string>
-#include <iostream>
+#include "Monkey.h"
 
 
-class Dart {
+class Dart : public Monkey {
 public:
-    Dart(std::string name, int initialCost, int initialRange, int initialDamage);
-    void attack();
+     Dart();
+     virtual ~Dart();
 
-private:
-    int cost;
-    int damage;
-    int range;
 
 };
 #endif

@@ -1,18 +1,12 @@
 #ifndef SNIPER_H
 #define SNIPER_H
-#include <string>
-#include <iostream>
+#include "Monkey.h"
 
-class Sniper {
+
+class Sniper : public Monkey {
 public:
-     Sniper(std::string name, int initialCost, int initialRange, int initialDamage);
-
-     void attack();
-private:
-    int cost;
-    int damage;
-    int range;
-
+     Sniper();
+     virtual ~Sniper();
 
 
 };

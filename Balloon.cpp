@@ -36,11 +36,6 @@ bool Balloon::isPopped() const {
     return popped;
 }
 
-/*void Balloon::pop() {
-    if (isPopped()==true){
-        delete this;
-    }
-}*/
 
 void Balloon::move(int velocityX, int velocityY) {
     x += velocityX;

@@ -1,18 +1,11 @@
 #ifndef CANNON_H
 #define CANNON_H
-#include <string>
-#include <iostream>
+#include "Monkey.h"
 
-class Cannon {
+class Cannon : public Monkey {
 public:
-     Cannon(std::string name, int initialCost, int initialRange, int initialDamage);
-
-     void attack();
-private:
-    int cost;
-    int damage;
-    int range;
-
+     Cannon();
+     virtual ~Cannon();
 
 
 };

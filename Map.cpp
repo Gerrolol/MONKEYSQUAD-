@@ -9,6 +9,10 @@ Map::Map(SDL_Renderer* renderer, int nCellCols, int nCellRows):
     textureLand = TextureLoader::loadTexture(renderer,"Grass.bmp");
     texturePath = TextureLoader::loadTexture(renderer,"Path.bmp");
 
+    textureDart = TextureLoader::loadTexture(renderer,"Dart.bmp");
+    textureSniper = TextureLoader::loadTexture(renderer,"Sniper.bmp");
+    textureCannon = TextureLoader::loadTexture(renderer,"Cannon.bmp");
+
     int mapSize = nRows * nCols;
     listCells.resize(mapSize, nullptr);
 }
@@ -30,6 +34,15 @@ void Map::drawCell(SDL_Renderer* renderer, int pos, int tilesize){
     }
     else if(listCells[pos]->getType() == 'P'){
         textureSelected = texturePath;
+    }
+    if(listCells[pos]->getType() == 'D'){
+        textureSelected = textureDart;
+    }
+    else if(listCells[pos]->getType() == 'C'){
+        textureSelected = textureCannon;
+    }
+    else if(listCells[pos]->getType() == 'S'){
+        textureSelected = textureSniper;
     }
     SDL_Rect rect = {((pos%16))*tilesize, (pos/16)*tilesize,tilesize,tilesize};
     SDL_RenderCopy(renderer, textureSelected,NULL, &rect);
