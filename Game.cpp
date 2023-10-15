@@ -9,6 +9,17 @@ std::vector<Balloon*> balloons;
 
 Game::~Game(){}
 
+struct Wave {
+    std::string balloonType;
+    int numBalloons;
+};
+std::vector<Wave> waves;
+int currentWave = 0;
+int balloonsInWave = 0;
+bool isWaveActive = false;
+int waveCooldown = 300;  // Cooldown between waves (adjust as needed)
+int timeElapsedInWave = 0;
+
 Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fullscreen){
     int flags = 0;
     if (fullscreen){
@@ -29,7 +40,14 @@ Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fu
     }else{
         isRunning = false;
     }
-    
+        Wave wave1 = {"red", 10};   // Wave 1: 10 red balloons
+        Wave wave2 = {"blue", 15};  // Wave 2: 15 blue balloons
+        Wave wave3 = {"green", 20}; // Wave 3: 20 green balloons
+
+        waves.push_back(wave1);
+        waves.push_back(wave2);
+        waves push_back(wave3);
+
         RedBalloon* redBalloon = new RedBalloon();
         BlueBalloon* blueBalloon = new BlueBalloon();
         GreenBalloon* greenBalloon = new GreenBalloon();
@@ -104,7 +122,16 @@ void Game::handleEvents(){
     }
 }
 
+
 void Game::update(){
+            if (isWaveActive) {
+            if (balloonsSpawnedInWave < waves[currentWave].numBalloons) {
+                spawnBalloon(waves[currentWave].balloonType);
+                balloonsSpawnedInWave++;
+            } else {
+                endWave();
+            }
+        }
 int balloonToPop = -1;
 for (int i = 0; i< Level.listCells.size();i++){
     if (Level.listCells[i]->getType() == 'D' ||Level.listCells[i]->getType() == 'S' ||Level.listCells[i]->getType() == 'C'){
