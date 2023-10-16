@@ -10,6 +10,7 @@ std::vector<Balloon*> balloons;
 
 Game::~Game(){}
 
+
 //creates game window and sets initial map.
 Game::Game(const char* title, int xpos, int ypos, int width, int height, bool fullscreen){
     int flags = 0;
@@ -106,8 +107,7 @@ void Game::handleEvents(){
 }
 
 
-void Game::update(){
-
+void Game::update(){ 
     balloonSpawnTimer++;
     //spawns red balloon if after 60 updates and less than 10 spawned
     if (balloonSpawnTimer >= 60 && spawnCount <10) {
@@ -128,7 +128,6 @@ void Game::update(){
         balloonSpawnTimer =0;
         spawnCount++;
     }
-    
 
 int balloonToPop = -1;
 //loops through list of cells and finds monkeys
@@ -231,10 +230,10 @@ void Game::render(){
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
     Level.draw(renderer, cellSize);
-        //renders balloons
-        for (size_t i = 0; i < balloons.size(); ++i) {
-        balloons[i]->render(renderer);
-        }
+    //renders balloons
+    for (size_t i = 0; i < balloons.size(); ++i) {
+    balloons[i]->render(renderer);
+    }
     SDL_RenderPresent(renderer);
 }
 

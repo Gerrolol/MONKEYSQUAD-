@@ -7,6 +7,7 @@ class RedBalloon : public Balloon{
 public:
   RedBalloon();
   virtual ~RedBalloon(); 
+  void move(int velocityX, int velocityY) override;
 
 };
 #endif 

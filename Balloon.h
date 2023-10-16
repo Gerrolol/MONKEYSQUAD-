@@ -16,7 +16,7 @@ class Balloon {
 
     void takeDamage(int damage);
 
-    virtual void move(int velocityX, int velocityY);
+    virtual void move(int velocityX, int velocityY) = 0;
 
     //for rendering 
     void setColor(SDL_Color color);

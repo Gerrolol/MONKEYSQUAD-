@@ -6,3 +6,7 @@ RedBalloon::RedBalloon() : Balloon("red", 100) {
 
 RedBalloon::~RedBalloon() {} 
 
+void RedBalloon::move(int velocityX, int velocityY) {
+    x += velocityX;
+    y += velocityY;
+}

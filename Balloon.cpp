@@ -37,12 +37,6 @@ bool Balloon::isPopped(){
     return hp <= 0;
 }
 
-//moves the balloon by adding X-velocity and y-velocity
-void Balloon::move(int velocityX, int velocityY) {
-    x += velocityX;
-    y += velocityY;
-}
-
 void Balloon::render(SDL_Renderer* renderer) {
 
     SDL_SetRenderDrawColor(renderer, colorSDL.r, colorSDL.g, colorSDL.b, colorSDL.a);
